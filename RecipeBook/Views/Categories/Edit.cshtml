@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+@model RecipeBook.Models.Category
+
+<h2>Edit</h2>
+
+<h4>Edit @Html.DisplayFor(model => model.CategoryName)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.CategoryId)
+
+  @Html.LabelFor(model => model.CategoryName)
+  @Html.EditorFor(model => model.CategoryName)
+
+  <input type="submit" value="Save" class="btn btn-default" />
+}
+
+<p>@Html.ActionLink("Back to Categories", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

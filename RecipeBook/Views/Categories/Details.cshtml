@@ -1,0 +1,33 @@
+@{
+  Layout = "_Layout";
+}
+@using RecipeBook.Models
+@model RecipeBook.Models.Category;
+
+<h2>Category Overview</h2>
+<hr />
+<h3>Category: @Html.DisplayNameFor(model => model.CategoryName): @Html.DisplayFor(model => model.CategoryName)</h3>
+
+@if(@Model.JoinEntries.Count == 0)
+{
+  <p>This Category is currently not assigned to any Recipes.</p>
+}
+else
+{
+  <h4><u>Recipes for @Html.DisplayFor(model => model.CategoryName)</u></h4>
+    <ul>
+    @foreach(var join in Model.JoinEntries)
+    {
+      <li>@join.Recipe.RecipeName</li>
+      @using (Html.BeginForm("DeleteRecipe", "Categories"))
+      {
+        @Html.Hidden("joinId", @join.CategoryRecipeId)
+        <input type="submit" value="Delete"/>
+      } 
+    }
+    </ul>
+}
+<p>@Html.ActionLink("Edit Category Information", "Edit", new { id = Model.CategoryId })
+<p>@Html.ActionLink("Delete Category", "Delete", new { id = Model.CategoryId })</p>
+<p>@Html.ActionLink("Add a Recipe", "AddRecipe", new { id = Model.CategoryId })</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

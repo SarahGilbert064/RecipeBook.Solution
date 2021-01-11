@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+
+
+@using RecipeBook.Models;
+@model List<RecipeBook.Models.Category>;
+
+<h1>Categories</h1>
+<hr />
+@if (@Model.Count == 0)
+{
+<h3>There are no Categories Listed</h3>
+}
+
+@foreach (Category category in Model)
+{
+  <li>@Html.ActionLink($"{category.CategoryName}", "Details", new { id = category.CategoryId })</li>
+  @using (Html.BeginForm("Delete", "Categories", FormMethod.Get))
+  {
+    @Html.Hidden("id", @category.CategoryId)
+    <input type="submit" value="Remove Category" class="btn btn-default"/>
+  }
+}
+<p>@Html.ActionLink("Add a new Category", "Create", "Categories")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

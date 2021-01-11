@@ -3,10 +3,11 @@ using RecipeBook.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RecipeBook.Controllers
 {
-  public class CategoriesController : Controllers
+  public class CategoriesController : Controller
   {
     private readonly RecipeBookContext _db;
     public CategoriesController(RecipeBookContext db)
@@ -44,7 +45,7 @@ namespace RecipeBook.Controllers
 
     public ActionResult Edit(int id)
     {
-      var thisCategory = _db.Categories.FirstOrDefault(category =category.CategoryId == id);
+      var thisCategory = _db.Categories.FirstOrDefault(category => category.CategoryId == id);
       return View(thisCategory);
     }
 

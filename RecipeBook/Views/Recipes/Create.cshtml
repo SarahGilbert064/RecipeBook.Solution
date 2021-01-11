@@ -7,13 +7,13 @@
 <h4>Create a new Recipe</h4>
 
 @using (Html.BeginForm())
-{
 
+{
     @Html.LabelFor(model => model.RecipeName)
     @Html.TextBoxFor(model => model.RecipeName)
 
     @Html.LabelFor(model => model.Description)
-    @Html.TextArea(model => model.Description) //might be TestAreaFor
+    @Html.TextAreaFor(model => model.Description) //might be TestAreaFor
 
     @Html.Label("Select Category")
     @Html.DropDownList("CategoryId")
@@ -27,5 +27,7 @@
 
     <input type="submit" value="Create Recipe" class="btn btn-default" />
 }
+
+
 <p>@Html.ActionLink("Show all Recipes", "Index")</p>
 <p>@Html.ActionLink("Home", "Index", "Home")</p>

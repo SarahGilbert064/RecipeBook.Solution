@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model RecipeBook.Models.Category
+
+<h4>Add a new Category</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.CategoryName)
+  @Html.TextBoxFor(model => model.CategoryName)
+
+  @* @Html.Label("Select Category")
+  @Html.DropDownList("CategoryId") *@
+
+  <input type="submit" value="Add Category" class="btn btn-default"/>
+}
+
+<p>@Html.ActionLink("Show all recipes", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
