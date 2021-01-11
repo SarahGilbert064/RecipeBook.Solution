@@ -1,0 +1,36 @@
+@{
+  Layout = "_Layout";
+}
+
+@model RecipeBook.Models.Recipe
+
+<h2>Edit</h2>
+
+<h4>Edit: @Html.DisplayFor(model => model.RecipeName)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.RecipeId)
+
+  @Html.LabelFor(model => model.RecipeName)
+  @Html.EditorFor(model => model.RecipeName)
+
+  @Html.LabelFor(model => model.Description)
+  @Html.TextArea(model => model.Description)
+
+  @Html.Label("Select Rating")
+  @Html.RadioButtonFor(model => model.StarRating,"1 Star")
+  @Html.RadioButtonFor(model => model.StarRating,"2 Star")
+  @Html.RadioButtonFor(model => model.StarRating,"3 Star")
+  @Html.RadioButtonFor(model => model.StarRating,"4 Star")
+  @Html.RadioButtonFor(model => model.StarRating,"5 Star")
+
+  @Html.Label("Select a Category")
+  @Html.DropDownList("CategoryId")
+
+  <input type="submit" value="Save" class="btn btn-default" />
+  
+}
+
+<p>@Html.ActionLink("Back to Recipes", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
