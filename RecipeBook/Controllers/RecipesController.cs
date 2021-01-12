@@ -30,8 +30,7 @@ namespace RecipeBook.Controllers
 
     public ActionResult BestOf()
     {
-      ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId","RecipeName", "StarRating");
-      
+      ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId", "RecipeName", "StarRating");
       return View(_db.Recipes.OrderByDescending(m=>m.StarRating).ToList());
     }
 

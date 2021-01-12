@@ -1,0 +1,63 @@
+/* body {
+  background-image:url(https://asianmint.com/wp-content/uploads/2019/09/cooking-class-bg.jpg);
+  font-family: 'Courier New', Courier, monospace;
+  background-color: rgb(223, 224, 224);
+  box-sizing: border-box;
+  text-align: center;
+  width: 100%;
+  height: auto;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.container {
+  background-color: rgb(134, 206, 248);
+  margin: auto;
+  padding: 4%;
+  max-width: 60rem;
+} */
+
+@media screen and (min-width: 50rem) {
+  .container {
+    margin: auto;
+    padding: 1rem;
+    max-width: 60rem;
+  }
+
+  body {
+    background-image:url(https://i.ytimg.com/vi/RxQPmpWA7FQ/maxresdefault.jpg);
+    box-sizing: border-box;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    background-size: cover;
+    object-fit: contain;
+    background-attachment: fixed;
+  }
+
+  .jumbotron {
+    border: 12px black;
+    padding: 34px;
+    box-sizing: border-box;
+    position: relative;
+    top: 110px;
+    border-style: groove;
+    border-radius: 0 0 85% 85% / 30%;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  h4 {
+    text-align: center;
+  }
+}
