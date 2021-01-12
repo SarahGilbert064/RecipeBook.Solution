@@ -15,15 +15,29 @@
   @Html.LabelFor(model => model.RecipeName)
   @Html.EditorFor(model => model.RecipeName)
 
-  @Html.LabelFor(model => model.Description)
-  @Html.TextAreaFor(model => model.Description)
+  @Html.LabelFor(model => model.Ingredients)
+  @Html.TextAreaFor(model => model.Ingredients)
 
-  @Html.Label("Select Rating")
-  @Html.RadioButtonFor(model => model.StarRating,"1 Star")
-  @Html.RadioButtonFor(model => model.StarRating,"2 Star")
-  @Html.RadioButtonFor(model => model.StarRating,"3 Star")
-  @Html.RadioButtonFor(model => model.StarRating,"4 Star")
-  @Html.RadioButtonFor(model => model.StarRating,"5 Star")
+  @Html.LabelFor(model => model.Instructions)
+  @Html.TextAreaFor(model => model.Instructions)
+
+    @Html.Label("Select Rating")
+    <br>
+    @Html.Label("1 Star")
+    @Html.RadioButtonFor(model => model.StarRating,"1 Star")
+    <br>
+    @Html.Label("2 Star")
+    @Html.RadioButtonFor(model => model.StarRating,"2 Star")
+    <br>
+    @Html.Label("3 Star")
+    @Html.RadioButtonFor(model => model.StarRating,"3 Star")
+    <br>
+    @Html.Label("4 Star")
+    @Html.RadioButtonFor(model => model.StarRating,"4 Star")
+    <br>
+    @Html.Label("5 Star")
+    @Html.RadioButtonFor(model => model.StarRating,"5 Star")
+    <br>
 
   @Html.Label("Select a Category")
   @Html.DropDownList("CategoryId")

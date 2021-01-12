@@ -7,7 +7,8 @@
 <h2>Recipe Details</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.RecipeName): @Html.DisplayFor(model => model.RecipeName)</h3>
-<h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>
+<h3>@Html.DisplayNameFor(model => model.Ingredients): @Html.DisplayFor(model => model.Ingredients)</h3>
+<h3>@Html.DisplayNameFor(model => model.Instructions): @Html.DisplayFor(model => model.Instructions)</h3>
 <h3>@Html.DisplayNameFor(model => model.StarRating): @Html.DisplayFor(model => model.StarRating)</h3>
 
   @if(@Model.JoinEntries.Count == 0)
@@ -17,7 +18,6 @@
   else
   {
     <h4>Categories @Html.DisplayFor(model => model.RecipeName) belongs to</h4>
-    <ul>
     @foreach(var join in Model.JoinEntries)
     {
       <li>@join.Category.CategoryName</li>
@@ -28,7 +28,6 @@
         <input type="submit" value="Delete"/>
       } 
     }
-    </ul>
   }
 
 <p>@Html.ActionLink("Back to Recipe list", "Index")</p>
