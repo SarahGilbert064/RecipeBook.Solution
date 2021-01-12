@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+
+@using RecipeBook.Models;
+@model IEnumerable<RecipeBook.Models.Recipe>
+@* @model List<RecipeBook.Models.Recipe>; *@
+
+@using (Html.BeginForm())
+{
+  <form asp-controller="RecipesController" asp-action="SearchBy" method="get">
+      <p>
+          Ingredients: <input type="text" name="searchString" />
+          <input type="submit" value="Filter" />
+      </p>
+  </form>
+}
+
+
+
+
+
+
+
+
+
+

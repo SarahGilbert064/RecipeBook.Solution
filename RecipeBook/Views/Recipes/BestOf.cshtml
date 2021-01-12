@@ -23,8 +23,5 @@
   }
 }
 
-@* List<Recipe> reasonList = _db.Recipes.OrderBy(m=>m.StarRating).ToList();
-ReasonList = new SelectList(reasonList, "Id", "Description"); *@
-
 <p>@Html.ActionLink("Add New Recipe", "Create")</p>
 <p>@Html.ActionLink("Home", "Index", "Home")</p>

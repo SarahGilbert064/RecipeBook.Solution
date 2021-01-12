@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RecipeBook.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -32,6 +33,38 @@ namespace RecipeBook.Controllers
     {
       ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId", "RecipeName", "StarRating");
       return View(_db.Recipes.OrderByDescending(m=>m.StarRating).ToList());
+    }
+
+    // public ActionResult SearchBy()
+    // {
+    //   ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId", "RecipeName", "Ingredients");
+    //   return View(_db.Recipes.OrderBy(m=>m.Ingredients).ToList());
+    // }
+
+//     public async Task<IActionResult> Index(string searchString)
+// {
+//     var movies = from m in _context.Movie
+//                  select m;
+
+//     if (!String.IsNullOrEmpty(searchString))
+//     {
+//         movies = movies.Where(s => s.Title.Contains(searchString));
+//     }
+
+//     return View(await movies.ToAsyncEnumerable().ToList()); // This line is different and does not require any additional using directives or packages to use
+// }
+
+    public async Task<IActionResult> SearchBy(string searchString)
+    {
+      ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId", "RecipeName", "Ingredients");
+        var search = from m in _db.Recipes
+          select m;
+
+        if (!String.IsNullOrEmpty(searchString))
+        {
+            search = search.Where(s => s.Ingredients.Contains(searchString));
+        }
+      return View(await search.ToAsyncEnumerable().ToList()); // This line is different and does not require any additional using directives or packages to use
     }
 
     [HttpPost]
