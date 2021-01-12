@@ -74,17 +74,21 @@ namespace RecipeBook.Controllers
 
     public ActionResult AddRecipe(int id)
     {
-      var thisRecipe = _db.Recipes.FirstOrDefault(recipes => recipes.RecipeId == id);
-      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "CategoryName");
-      return View(thisRecipe);
+      var thisCategory = _db.Categories.FirstOrDefault(category => category.CategoryId == id);
+      ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId", "RecipeName");
+      return View(thisCategory);
     }
 
     [HttpPost]
     public ActionResult AddRecipe(Recipe recipe, int CategoryId)
     {
-      if(CategoryId != 0)
+      if (CategoryId != 0)
       {
-        _db.CategoryRecipe.Add(new CategoryRecipe() { CategoryId = CategoryId, RecipeId = recipe.RecipeId });       
+        var returnedJoin = _db.CategoryRecipe.Any(join => join.RecipeId == recipe.RecipeId && join.CategoryId == CategoryId); 
+        if (!returnedJoin) 
+        {
+          _db.CategoryRecipe.Add(new CategoryRecipe() { CategoryId = CategoryId, RecipeId = recipe.RecipeId });
+        }
       }
         _db.SaveChanges();
         return RedirectToAction("Index");

@@ -27,8 +27,9 @@ namespace RecipeBook.Migrations
                     RecipeId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     RecipeName = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    StarRating = table.Column<string>(nullable: true)
+                    Ingredients = table.Column<string>(nullable: true),
+                    Instructions = table.Column<string>(nullable: true),
+                    StarRating = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

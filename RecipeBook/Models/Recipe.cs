@@ -12,7 +12,7 @@ namespace RecipeBook.Models
     public string RecipeName { get; set; }
     public string Ingredients { get; set; }
     public string Instructions { get; set; }
-    public string StarRating { get; set; }
+    public int StarRating { get; set; }
     public ICollection<CategoryRecipe> JoinEntries { get; }
   }
 }

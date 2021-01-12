@@ -15,7 +15,6 @@
 else
 {
   <h4><u>Recipes for @Html.DisplayFor(model => model.CategoryName)</u></h4>
-    <ul>
     @foreach(var join in Model.JoinEntries)
     {
       <li>@join.Recipe.RecipeName</li>
@@ -25,7 +24,6 @@ else
         <input type="submit" value="Delete"/>
       } 
     }
-    </ul>
 }
 <p>@Html.ActionLink("Edit Category Information", "Edit", new { id = Model.CategoryId })
 <p>@Html.ActionLink("Delete Category", "Delete", new { id = Model.CategoryId })</p>

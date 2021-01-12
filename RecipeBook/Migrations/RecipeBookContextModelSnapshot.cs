@@ -57,7 +57,7 @@ namespace RecipeBook.Migrations
 
                     b.Property<string>("RecipeName");
 
-                    b.Property<string>("StarRating");
+                    b.Property<int>("StarRating");
 
                     b.HasKey("RecipeId");
 

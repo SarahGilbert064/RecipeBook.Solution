@@ -1,16 +1,17 @@
 @{
   Layout = "_Layout";
 }
-
 @using RecipeBook.Models;
 @model List<RecipeBook.Models.Recipe>;
 
-<h1>Recipes:</h1>
+<h2>Your Recipes from Best to Worst:</h2>
 
 @if (@Model.Count == 0)
 {
   <h3>No Recipes have been created yet...</h3>
 }
+
+
 
 @foreach(Recipe recipe in Model)
 {
@@ -22,6 +23,8 @@
   }
 }
 
+@* List<Recipe> reasonList = _db.Recipes.OrderBy(m=>m.StarRating).ToList();
+ReasonList = new SelectList(reasonList, "Id", "Description"); *@
+
 <p>@Html.ActionLink("Add New Recipe", "Create")</p>
-<p>@Html.ActionLink("Best Of Recipes", "BestOf")</p>
 <p>@Html.ActionLink("Home", "Index", "Home")</p>

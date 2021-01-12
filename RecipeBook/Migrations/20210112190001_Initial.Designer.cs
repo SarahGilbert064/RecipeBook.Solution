@@ -8,8 +8,8 @@ using RecipeBook.Models;
 namespace RecipeBook.Migrations
 {
     [DbContext(typeof(RecipeBookContext))]
-    [Migration("20210111230717_Ingredients-Instructions")]
-    partial class IngredientsInstructions
+    [Migration("20210112190001_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,7 +59,7 @@ namespace RecipeBook.Migrations
 
                     b.Property<string>("RecipeName");
 
-                    b.Property<string>("StarRating");
+                    b.Property<int>("StarRating");
 
                     b.HasKey("RecipeId");
 

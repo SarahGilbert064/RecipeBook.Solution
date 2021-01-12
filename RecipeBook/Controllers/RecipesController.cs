@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace RecipeBook.Controllers
 {
@@ -27,13 +28,24 @@ namespace RecipeBook.Controllers
       return View();
     }
 
+    public ActionResult BestOf()
+    {
+      ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId","RecipeName", "StarRating");
+      
+      return View(_db.Recipes.OrderByDescending(m=>m.StarRating).ToList());
+    }
+
     [HttpPost]
     public ActionResult Create(Recipe recipe, int CategoryId)
     {
       _db.Recipes.Add(recipe);
       if (CategoryId != 0)
       {
-        _db.CategoryRecipe.Add(new CategoryRecipe() { CategoryId = CategoryId, RecipeId = recipe.RecipeId });
+        var returnedJoin = _db.CategoryRecipe.Any(join => join.RecipeId == recipe.RecipeId && join.CategoryId == CategoryId);
+        if (!returnedJoin) 
+        {
+          _db.CategoryRecipe.Add(new CategoryRecipe() { CategoryId = CategoryId, RecipeId = recipe.RecipeId });
+        }
       }
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -60,7 +72,11 @@ namespace RecipeBook.Controllers
     {
       if (CategoryId != 0)
       {
-        _db.CategoryRecipe.Add(new CategoryRecipe(){ CategoryId = CategoryId, RecipeId = recipe.RecipeId });
+        var returnedJoin = _db.CategoryRecipe.Any(join => join.RecipeId == recipe.RecipeId && join.CategoryId == CategoryId);
+        if (!returnedJoin) 
+        {
+          _db.CategoryRecipe.Add(new CategoryRecipe() { CategoryId = CategoryId, RecipeId = recipe.RecipeId });
+        }
       }
       _db.Entry(recipe).State = EntityState.Modified;
       _db.SaveChanges();
@@ -79,29 +95,15 @@ namespace RecipeBook.Controllers
     {
       if (CategoryId != 0)
       {
-        _db.CategoryRecipe.Add(new CategoryRecipe() { CategoryId = CategoryId, RecipeId = recipe.RecipeId });
+        var returnedJoin = _db.CategoryRecipe.Any(join => join.RecipeId == recipe.RecipeId && join.CategoryId == CategoryId); 
+        if (!returnedJoin) 
+        {
+          _db.CategoryRecipe.Add(new CategoryRecipe() { CategoryId = CategoryId, RecipeId = recipe.RecipeId });
+        }
       }
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
-    // public ActionResult AddRating(int id)
-    // {
-    //   var thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
-    //   ViewBag.RatingId = new SelectList(_db.Ratings, "RatingId", "StarRating");
-    //   return View(thisRecipe);
-    // }
-
-    // [HttpPost]
-    // public ActionResult AddRating(Recipe recipe, int RatingId)
-    // {
-    //   if (RatingId !=0)
-    //   {
-    //     _db.RatingRecipe.Add(new RatingRecipe() { RatingId = RatingId, RecipeId = recipe.RecipeId });
-    //   }
-    //   _db.SaveChanges();
-    //   return RedirectToAction("Index");
-    // }
 
     public ActionResult Delete(int id)
     {
@@ -126,7 +128,5 @@ namespace RecipeBook.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
-
   }
 }
