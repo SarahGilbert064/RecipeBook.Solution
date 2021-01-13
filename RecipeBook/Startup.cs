@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
 using RecipeBook.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace RecipeBook
 {
@@ -27,6 +28,20 @@ namespace RecipeBook
       services.AddEntityFrameworkMySql()
           .AddDbContext<RecipeBookContext>(options => options
           .UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
+          
+      services.AddIdentity<ApplicationUser, IdentityRole>()
+        .AddEntityFrameworkStores<RecipeBookContext>()
+        .AddDefaultTokenProviders();
+        
+      services.Configure<IdentityOptions>(options =>
+      {
+        options.Password.RequireDigit = false;
+        options.Password.RequiredLength = 0;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredUniqueChars = 0;
+      });
     }
 
     public void Configure(IApplicationBuilder app)
@@ -34,6 +49,8 @@ namespace RecipeBook
       app.UseStaticFiles();
 
       app.UseDeveloperExceptionPage();
+
+      app.UseAuthentication();
 
       app.UseMvc(routes =>
       {

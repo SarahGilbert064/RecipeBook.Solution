@@ -13,6 +13,7 @@ namespace RecipeBook.Models
     public string Ingredients { get; set; }
     public string Instructions { get; set; }
     public int StarRating { get; set; }
+    public virtual ApplicationUser User { get; set; }
     public ICollection<CategoryRecipe> JoinEntries { get; }
   }
 }

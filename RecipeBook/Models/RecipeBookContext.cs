@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-//Identifying the Database Schema
+
 
 namespace RecipeBook.Models
 {
-  public class RecipeBookContext : DbContext
+  public class RecipeBookContext : IdentityDbContext<ApplicationUser>
   {
     public virtual DbSet<Category> Categories { get; set; } //DBSets are new tables being created. 
     public DbSet<Recipe> Recipes { get; set; }

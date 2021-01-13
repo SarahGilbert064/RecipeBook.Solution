@@ -5,54 +5,39 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 using System;
 
 namespace RecipeBook.Controllers
 {
+  [Authorize]
   public class RecipesController : Controller
   {
     private readonly RecipeBookContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
     
-    public RecipesController(RecipeBookContext db)
+    public RecipesController(UserManager<ApplicationUser> userManager, RecipeBookContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
-      return View(_db.Recipes.ToList());
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).ToList();
+      return View(userRecipes);
     }
 
-    public ActionResult Create()
-    {
-      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "CategoryName");
-      return View();
-    }
 
     public ActionResult BestOf()
     {
       ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId", "RecipeName", "StarRating");
       return View(_db.Recipes.OrderByDescending(m=>m.StarRating).ToList());
     }
-
-    // public ActionResult SearchBy()
-    // {
-    //   ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId", "RecipeName", "Ingredients");
-    //   return View(_db.Recipes.OrderBy(m=>m.Ingredients).ToList());
-    // }
-
-//     public async Task<IActionResult> Index(string searchString)
-// {
-//     var movies = from m in _context.Movie
-//                  select m;
-
-//     if (!String.IsNullOrEmpty(searchString))
-//     {
-//         movies = movies.Where(s => s.Title.Contains(searchString));
-//     }
-
-//     return View(await movies.ToAsyncEnumerable().ToList()); // This line is different and does not require any additional using directives or packages to use
-// }
 
     public async Task<IActionResult> SearchBy(string searchString)
     {
@@ -66,10 +51,18 @@ namespace RecipeBook.Controllers
       }
       return View(await search.ToAsyncEnumerable().ToList()); // This line is different and does not require any additional using directives or packages to use
     }
+    public ActionResult Create()
+    {
+      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "CategoryName");
+      return View();
+    }
 
     [HttpPost]
-    public ActionResult Create(Recipe recipe, int CategoryId)
+    public async Task<ActionResult> Create(Recipe recipe, int CategoryId)
     {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      recipe.User = currentUser;
       _db.Recipes.Add(recipe);
       if (CategoryId != 0)
       {
