@@ -57,13 +57,13 @@ namespace RecipeBook.Controllers
     public async Task<IActionResult> SearchBy(string searchString)
     {
       ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId", "RecipeName", "Ingredients");
-        var search = from m in _db.Recipes
-          select m;
+      var search = from m in _db.Recipes
+        select m;
 
-        if (!String.IsNullOrEmpty(searchString))
-        {
-            search = search.Where(s => s.Ingredients.Contains(searchString));
-        }
+      if (!String.IsNullOrEmpty(searchString))
+      {
+          search = search.Where(s => s.Ingredients.Contains(searchString));
+      }
       return View(await search.ToAsyncEnumerable().ToList()); // This line is different and does not require any additional using directives or packages to use
     }
 

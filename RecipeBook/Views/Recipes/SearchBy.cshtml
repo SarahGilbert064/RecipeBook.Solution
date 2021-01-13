@@ -3,8 +3,8 @@
 }
 
 @using RecipeBook.Models;
-@model IEnumerable<RecipeBook.Models.Recipe>
-@* @model List<RecipeBook.Models.Recipe>; *@
+@model List<RecipeBook.Models.Recipe>;
+
 
 @using (Html.BeginForm())
 {
@@ -16,6 +16,10 @@
   </form>
 }
 
+@foreach(Recipe recipe in Model)
+{
+  <li>@Html.ActionLink($"{recipe.RecipeName}", "Details", "Recipes", new { id = recipe.RecipeId })</li>
+}
 
 
 
