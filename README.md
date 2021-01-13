@@ -1,12 +1,12 @@
 # **RecipeBook.Solution**
-Project Initiated: 2021-01-04<br>
-Updated: 2021-01-04f
+Project Initiated: 2021-01-11<br>
+Updated: 2021-01-13
 
 ## **Project Description**
 
-This project was created to help us further our knowledge with using join statements to help connect tables in our database. We also were able to get additional practice with using many to many relationships with our tables in our datababse. This application is a univeristy registrar that helps keep track of students and courses. Here is a breakdown of the features it has, their functionality, and their benefits.
+This project was created to help us further our knowledge with using join statements to help connect tables in our database. We also were able to get additional practice with using many to many relationships with our tables in our datababse. This application was created to allow the user to keep track of their recipes and tag them in multiple categories that they relate to. Here is a breakdown of the features it has, their functionality, and their benefits.
 
-||| 
+
 | ID | User Story | Accepted |
 |---------|-----------|--------|
 | US01 | "As a user, I want to add a recipe with ingredients and instructions, so I remember how to prepare my favorite dishes."| True |
@@ -111,7 +111,7 @@ Then open MySQL Workbench and select the Local instance 3306 server. You will ne
 ### **Install/Setup Project** ###
 
 **Option 1** (download zip file)
-1) Copy and paste the following GitHub project link into your web browser's url bar and hit enter/return. https://github.com/RMGit-it/RecipeBook.Solution.git
+1) Copy and paste the following GitHub project link into your web browser's url bar and hit enter/return. https://github.com/SarahGilbert064/RecipeBook.Solution.git
 2) Download a .zip copy the repository by clicking on the large green "Code" button near the upper right corner of the screen.
 3) Right click the .zip file and extract(unzip) it's contents.
 4) Open your computer's terminal/console, and navigate to folder called "__RecipeBook.Solution__". 
